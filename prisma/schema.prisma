@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique @db.VarChar(100)
+  books     Book[]  
+  games     Game[]
+  cardGames CardGame[]
+  
+
+
+  @@map("users")
+}
+
+model Book{
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String?   @db.Text
+  author    String?
+  owner     User      @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+}
+
+model Game{
+  id        Int       @id @default(autoincrement())
+  title     String  
+  company   String?
+  release   DateTime?
+  owner     User      @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+}
+
+model CardGame{
+  id        Int       @id @default(autoincrement())
+  title     String  
+  company   String? 
+  release   DateTime?
+  rules     String?   @db.Text
+  owner     User      @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+}
