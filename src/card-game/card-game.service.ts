@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CardGame, Prisma } from 'src/generated/prisma/client';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service.js';
 
 @Injectable()
 export class CardGameService {
 
     constructor(private prisma: PrismaService) {}
 
-    async game(
+    async cardGame(
         cardGameWhereUniqueInput: Prisma.CardGameWhereUniqueInput,
     ): Promise<CardGame | null>{
         return this.prisma.cardGame.findUnique({
@@ -49,7 +49,7 @@ export class CardGameService {
         });
     }
 
-    async deleteGame(where: Prisma.CardGameWhereUniqueInput): Promise<CardGame>{
+    async deleteCardGame(where: Prisma.CardGameWhereUniqueInput): Promise<CardGame>{
         return this.prisma.cardGame.delete({
             where
         });
