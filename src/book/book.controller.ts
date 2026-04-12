@@ -1,15 +1,17 @@
 import { Controller, Param, Get, Post, Body, Put, Delete } from '@nestjs/common';
 import { BookService } from './book.service.js';
 import { Book as BookModel } from 'src/generated/prisma/client';
+import { UserService } from 'src/user/user.service.js';
 
 
 @Controller('book')
 export class BookController {
     constructor( 
         private readonly bookService: BookService,
+        private readonly userService: UserService
     ){}
 
-    @Get('id')
+    @Get(':id')
     async getBookById(@Param('id') id:string): Promise<BookModel | null>{
         return this.bookService.book({ id: Number(id) });
     }
@@ -47,7 +49,7 @@ export class BookController {
         });
     }
 
-    @Delete('id')
+    @Delete(':id')
     async deleteBook(@Param('id') id:string): Promise<BookModel> {
         return this.bookService.deleteBook({id: Number(id)});
     }

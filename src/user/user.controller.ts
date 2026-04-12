@@ -13,8 +13,13 @@ export class UserController {
         return this.userService.createUser(userData)
     }
 
-    @Get('id')
+    @Get(':id')
     async getUserById(@Param('id') id: string): Promise<UserModel | null> {
         return this.userService.user({ id: Number(id)})
+    }
+
+    @Delete(':id')
+    async deleteUserById(@Param('id') id: string): Promise<UserModel> {
+        return this.userService.deleteuser({ id: Number(id)})
     }
 }

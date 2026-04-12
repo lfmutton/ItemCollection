@@ -8,7 +8,7 @@ export class GameController {
         private readonly gameService: GameService,
     ){}
 
-    @Get('id')
+    @Get(':id')
     async getGameById(@Param('id') id:string): Promise<GameModel | null>{
         return this.gameService.game({ id: Number(id) });
     }
@@ -45,7 +45,7 @@ export class GameController {
         });
     }
 
-    @Delete('id')
+    @Delete(':id')
     async deleteGame(@Param('id') id:string): Promise<GameModel> {
         return this.gameService.deleteGame({id: Number(id)});
     }

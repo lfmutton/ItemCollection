@@ -8,7 +8,7 @@ export class CardGameController {
         private readonly cardGameService: CardGameService,
     ){}
 
-    @Get('id')
+    @Get(':id')
     async getCardGameById(@Param('id') id:string): Promise<CardGameModel | null>{
         return this.cardGameService.cardGame({ id: Number(id) });
     }
@@ -45,7 +45,7 @@ export class CardGameController {
         });
     }
 
-    @Delete('id')
+    @Delete(':id')
     async deleteCardGame(@Param('id') id:string): Promise<CardGameModel> {
         return this.cardGameService.deleteCardGame({id: Number(id)});
     }
