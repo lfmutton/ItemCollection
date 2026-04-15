@@ -31,6 +31,17 @@ export class GameController {
         });
     }
 
+    @Get('userId/:ownerId')
+        async getGameByOwnerId(
+            @Param('ownerId') ownerId: string
+        ): Promise<GameModel[]> {
+            return this.gameService.games({
+                where: {
+                    ownerId: Number(ownerId)
+                }   
+            });
+        }
+
     @Post()
     async createDraft(
         @Body() postData: { title: string;  company: string; userId: number}

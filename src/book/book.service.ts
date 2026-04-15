@@ -8,7 +8,7 @@ export class BookService {
     constructor(private prisma: PrismaService) {}
 
     async book(
-        bookWhereUniqueInput: Prisma.BookWhereUniqueInput,
+        bookWhereUniqueInput: Prisma.BookWhereUniqueInput
     ): Promise<Book | null>{
         return this.prisma.book.findUnique(
             {

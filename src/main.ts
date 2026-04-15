@@ -8,7 +8,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Item Collection')
     .setDescription('What do I put here?')
-    .setVersion('1.0')
+    .setVersion('1.1')
     .addTag('My things')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);

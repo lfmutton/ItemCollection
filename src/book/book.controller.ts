@@ -1,6 +1,7 @@
 import { Controller, Param, Get, Post, Body, Put, Delete } from '@nestjs/common';
 import { BookService } from './book.service.js';
 import { Book as BookModel } from 'src/generated/prisma/client';
+import { NullableDateTimeFieldUpdateOperationsInput } from 'src/generated/prisma/models.js';
 
 
 @Controller('book')
@@ -29,6 +30,17 @@ export class BookController {
                     }
                 ],
             },
+        });
+    }
+
+    @Get('userId/:ownerId')
+    async getBookByOwnerId(
+        @Param('ownerId') ownerId: string
+    ): Promise<BookModel[]> {
+        return this.bookService.books({
+            where: {
+                ownerId: Number(ownerId)
+            }   
         });
     }
 
